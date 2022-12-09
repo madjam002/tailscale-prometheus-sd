@@ -1,0 +1,11 @@
+{
+  "matchers": [
+    { "description": "node-exporter" },
+    {
+      "port": 9100,
+      "labels": {
+        "labelsToAdd": "canGoHere"
+      }
+    }
+  ]
+}

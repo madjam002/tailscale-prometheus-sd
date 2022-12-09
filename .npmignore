@@ -1,0 +1,4 @@
+.yarn
+.vscode
+src
+*.nix
