@@ -8,6 +8,7 @@ import { parser } from 'stream-json'
 import { streamValues } from 'stream-json/streamers/StreamValues'
 import { getMatch } from 'ip-matching'
 import { isIP } from 'net'
+import { Transform } from 'stream'
 
 if (!process.env.TAILSCALE_PROMETHEUS_SD_CONFIG) {
   console.error('TAILSCALE_PROMETHEUS_SD_CONFIG is not provided, must be a valid JSON file')
@@ -120,12 +121,24 @@ function tailscaleStateMonitor() {
   return eventChannel((emitter) => {
     const monitor = spawn(
       'tailscale',
-      ['debug', 'watch-ipn'],
+      ['debug', 'watch-ipn', '-netmap=true'],
       {},
     )
 
+    const tailscaleMonitorStreamFilter = new Transform({
+      transform(chunk, encoding, callback) {
+        if (chunk.toString().trim() === 'Connected.') {
+          console.log('Connected')
+          callback(null, '{}')
+          return
+        }
+        callback(null, chunk)
+      },
+    })
+
     chain([
       monitor.stdout,
+      tailscaleMonitorStreamFilter,
       parser({ jsonStreaming: true }),
       streamValues(),
       ({ value: object }: any) => {

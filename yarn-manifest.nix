@@ -62,7 +62,9 @@ let
       reference = "npm:0.16.3";
       linkType = "HARD";
       outputName = "esbuild-darwin-arm64-0.16.3-e4da2a32cb";
-      outputHash = "";
+      outputHashByPlatform = {
+        "aarch64-darwin" = "sha512-QT5B9B2tikDl7uplt5UoyTbfL7oA7bTdceGcwRxZRREN0I4VmuFEiyU5l64ZnI6Gs4DLrTBGPtemJQFTbVAnmQ==";
+      };
       shouldBeUnplugged = true;
       installCondition = stdenv: (stdenv.isDarwin) && (stdenv.isAarch64);
       flatName = "darwin-arm64";
@@ -469,6 +471,7 @@ let
       outputName = "esbuild-0.16.3-4dec320b34";
       outputHashByPlatform = {
         "x86_64-linux" = "sha512-8UxyetHT29Ml7DXfQTATezQXwR0YRZ7iRViVPi7o4UgAMiXBJyLd3GOhCaANl/LzzzqhFNTpsJNfp0ldV09l6A==";
+        "aarch64-darwin" = "sha512-8UxyetHT29Ml7DXfQTATezQXwR0YRZ7iRViVPi7o4UgAMiXBJyLd3GOhCaANl/LzzzqhFNTpsJNfp0ldV09l6A==";
       };
       shouldBeUnplugged = true;
       flatName = "esbuild";
