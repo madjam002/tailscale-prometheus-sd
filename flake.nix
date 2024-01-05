@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-22.11;
-    utils.url = github:numtide/flake-utils;
-    yarnpnp2nix.url = github:madjam002/yarnpnp2nix;
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    utils.url = "github:numtide/flake-utils";
+    yarnpnp2nix.url = "github:madjam002/yarnpnp2nix";
     yarnpnp2nix.inputs.nixpkgs.follows = "nixpkgs";
     yarnpnp2nix.inputs.utils.follows = "utils";
   };
