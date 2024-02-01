@@ -32,6 +32,7 @@ interface TailscaleService {
 
 interface TailscalePeer {
   ID: number
+  Name?: string
   Addresses?: string[]
   Hostinfo?: {
     Services?: TailscaleService[]
@@ -108,7 +109,11 @@ async function netMapToServiceDiscoveryFile(netMap: TailscaleNetMap) {
       targets: [
         `${svc.ipToUse}:${svc.service.Port.toString()}`
       ],
-      labels: svc.matcher.labels ?? {},
+      labels: {
+        ...(svc.matcher.labels ?? {}),
+        node: svc.peer.Name ?? undefined,
+        hostname: svc.peer.Hostinfo.Hostname ?? undefined,
+      },
     })
   }
 
