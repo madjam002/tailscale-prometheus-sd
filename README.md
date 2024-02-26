@@ -6,7 +6,7 @@ Unlike alternatives in this space, tailscale-prometheus-sd uses the local Tailsc
 
 As it uses the Tailscale localapi, it also works with [Headscale](https://github.com/juanfont/headscale) with a small patch needed to enable service collection:
 
-```
+```diff
 diff --git a/api_common.go b/api_common.go
 --- a/api_common.go
 +++ b/api_common.go
@@ -31,7 +31,7 @@ Run with `TAILSCALE_PROMETHEUS_SD_CONFIG=path/to/config.json PROMETHEUS_TARGETS_
 
 Example config.json:
 
-```
+```json5
 {
   "matchers": [
     { "description": "node-exporter" }, // match services collected by description (Tailscale infers this from the process name automatically)
